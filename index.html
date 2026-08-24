@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anton Adiwijaya - Personal Portfolio</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-card: rgba(30, 41, 59, 0.7);
+            --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --glass-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Ambient Glow Background */
+        .glow-1 {
+            position: absolute;
+            top: -10%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .glow-2 {
+            position: absolute;
+            bottom: -10%;
+            right: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, rgba(0, 0, 0, 0) 70%);
+            border-radius: 50%;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Header / Navbar */
+        header {
+            position: relative;
+            z-index: 10;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.35rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-main);
+        }
+
+        /* Main Container */
+        main {
+            position: relative;
+            z-index: 10;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1.5rem 1rem 3rem 1rem;
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 1rem;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-color);
+            font-size: 0.8rem;
+            color: #c084fc;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(5px);
+        }
+
+        .hero h1 {
+            font-size: clamp(2rem, 4vw, 3.2rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 0.8rem;
+            letter-spacing: -1px;
+        }
+
+        .hero h1 span {
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p.motto {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-size: clamp(1rem, 1.8vw, 1.25rem);
+            color: var(--text-muted);
+            line-height: 1.5;
+            font-weight: 400;
+        }
+
+        /* Compact Grid Cards */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.25rem;
+            margin-top: 1.5rem;
+            justify-content: center;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.25rem 1.25rem 1rem 1.25rem;
+            text-decoration: none;
+            color: var(--text-main);
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(12px);
+            box-shadow: var(--glass-shadow);
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--accent-gradient);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: 0;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(168, 85, 247, 0.4);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .card:hover::before {
+            opacity: 0.05;
+        }
+
+        .card-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Icon Box */
+        .icon-box {
+            width: 68px;
+            height: 68px;
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem;
+            color: #a855f7;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover .icon-box {
+            background: var(--accent-gradient);
+            color: #ffffff;
+            border-color: transparent;
+            transform: scale(1.08);
+        }
+
+        .card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.35rem;
+        }
+
+        .card p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .card-footer {
+            position: relative;
+            z-index: 1;
+            margin-top: 1.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #6366f1;
+            transition: color 0.3s ease;
+        }
+
+        .card:hover .card-footer {
+            color: #c084fc;
+        }
+
+        .card-footer i {
+            transition: transform 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        .card:hover .card-footer i {
+            transform: translateX(4px);
+        }
+
+        /* Footer */
+        footer {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 1.5rem;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            border-top: 1px solid var(--border-color);
+            backdrop-filter: blur(10px);
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 1rem 5%; }
+            .grid-container { grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 1rem; }
+            .hero { margin-bottom: 2rem; }
+            .card { padding: 1rem; }
+            .icon-box { width: 58px; height: 58px; font-size: 1.8rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="glow-1"></div>
+    <div class="glow-2"></div>
+
+    <header>
+        <div class="logo">ANTON DIGITAL</div>
+        <ul class="nav-links">
+            <li><a href="#"><i class="fa-solid fa-house"></i> Beranda</a></li>
+        </ul>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="badge">
+                <i class="fa-solid fa-sparkles"></i>
+                <span>Selamat Datang di Portofolio Digital</span>
+            </div>
+            <h1>ANTON <span>ADIWIJAYA</span></h1>
+            <p class="motto">"Belajar Tiada Henti, Berkarya Sampai Akhir, Berbagi Selamanya"</p>
+        </section>
+
+        <section class="grid-container">
+            <!-- Card 1: Riwayat Hidup -->
+            <a href="https://antonadiwijaya.github.io/riwayat-pendidikan-pekerjaan" target="_blank" class="card">
+                <div class="card-content">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-id-card"></i>
+                    </div>
+                    <h3>Riwayat Hidup</h3>
+                    <p>Perjalanan karir dan rekam jejak profesional.</p>
+                </div>
+                <div class="card-footer">
+                    <span>Lihat Profil</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </a>
+
+            <!-- Card 2: Diklat & Pelatihan -->
+            <a href="https://antonadiwijaya.github.io/riwayat-diklat" target="_blank" class="card">
+                <div class="card-content">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <h3>Diklat & Pelatihan</h3>
+                    <p>Sertifikasi dan pengembangan keahlian.</p>
+                </div>
+                <div class="card-footer">
+                    <span>Jelajah Diklat</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </a>
+
+            <!-- Card 3: Pengalaman Trainer -->
+            <a href="https://antonadiwijaya.github.io/riwayat-trainer" target="_blank" class="card">
+                <div class="card-content">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-display"></i>
+                    </div>
+                    <h3>Pengalaman Trainer</h3>
+                    <p>Aktivitas narasumber dan workshop.</p>
+                </div>
+                <div class="card-footer">
+                    <span>Aktivitas Trainer</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </a>
+
+            <!-- Card 4: Karya E-Book -->
+            <a href="https://lynk.id/19032025" target="_blank" class="card">
+                <div class="card-content">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-book-bookmark"></i>
+                    </div>
+                    <h3>Karya E-Book</h3>
+                    <p>Buku digital dan publikasi tulisan.</p>
+                </div>
+                <div class="card-footer">
+                    <span>Unduh & Baca</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </a>
+
+            <!-- Card 5: Karya Media -->
+            <a href="https://s.id/mpi-ipa-smp" target="_blank" class="card">
+                <div class="card-content">
+                    <div class="icon-box">
+                        <i class="fa-solid fa-photo-film"></i>
+                    </div>
+                    <h3>Karya Media</h3>
+                    <p>Galeri konten multimedia dan karya visual.</p>
+                </div>
+                <div class="card-footer">
+                    <span>Lihat Karya</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                </div>
+            </a>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; Anton Adiwijaya, S.Pd. | Guru Digital.</p>
+    </footer>
+
+</body>
+</html>
